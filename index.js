@@ -80,7 +80,7 @@ const hashmap = () => {
     return false
   }
 
-const length = () => {
+  const length = () => {
     let count = 0;
     for(let i = 0; i < map.buckets.length; i++){
       count += map.buckets[i].length
@@ -88,13 +88,21 @@ const length = () => {
     return count
   }
 
-  // function clear() {
+  const clear = () => {
+    map.buckets = new Array(map.size).fill(null).map(() => []);
+  }
 
-  // }
-
-  // function keys() {
-
-  // }
+  const keys = () => {
+    const arr = [];
+    // Add all keys to the array
+    for (let i = 0; i < map.buckets.length; i++) {
+        const bucket = map.buckets[i];
+        for (let j = 0; j < bucket.length; j++) {
+            arr.push(bucket[j].key);
+        }
+    }
+    return arr;
+  };
 
   // function values() {
 
@@ -109,7 +117,9 @@ const length = () => {
     get,
     has,
     remove,
-    length
+    length,
+    clear,
+    keys
    };
 };
 
@@ -120,4 +130,9 @@ myMap.set("chris", "My name is chris")
 console.log(myMap.get("jeff"));
 console.log(myMap.has("jeff"));
 console.log(myMap.length());
+console.log(myMap.keys());
+myMap.clear()
+console.log(myMap.has("jeff"));
+console.log(myMap.length());
+
 console.log(myMap);
